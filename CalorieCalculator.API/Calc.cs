@@ -1,5 +1,5 @@
 ﻿using CalorieCalculator.API.Models;
-using CalorieCalculator.API.Validators;
+using CalorieCalculator.API.Services;
 using System;
 using System.IO;
 using System.Reflection;
@@ -11,10 +11,7 @@ namespace CalorieCalculator.API
     {
         public static string DISTANCE_FROM_IDEAL_WEIGHT { get; set; }
         public static string IDEAL_WEIGHT { get; set; }
-        public static string CALORIES { get; set; }
-
-        private static Patient _currentPatient { get; set; }
-        
+        public static string CALORIES { get; set; }           
         public enum The_sex
         {
             Male = Gender.Male,
@@ -25,49 +22,37 @@ namespace CalorieCalculator.API
         {
             //Clear old results
             ClearData();
-             /* Validate User Input: */
-             //Validate height (feet) is numeric value            
-
-             var validatorResult = PhysicalDataValidator.ValidateHeightFeet(heightFeet);
-            if(validatorResult.IsValid) validatorResult = PhysicalDataValidator.ValidatHeightInches(heightInches);
-            if (validatorResult.IsValid) validatorResult = PhysicalDataValidator.ValidatHeightInches(weight);
-            if (validatorResult.IsValid) validatorResult = PhysicalDataValidator.ValidatHeightInches(age);
-            if (!validatorResult.IsValid) throw new Exception(validatorResult.ErrorMessage);
 
             #region Initialize Patient Data
 
-            var physicalData = new PatientPhysicalData
-            {
-                Age = Convert.ToDouble(age),
-                HeightFeet = Convert.ToDouble(heightFeet),
-                HeightInches = Convert.ToDouble(heightInches),
-                Weight = Convert.ToDouble(weight)
-            };           
-
-            _currentPatient = PatientFactory.Create((Gender)sex);
-            _currentPatient.PhysicalData = physicalData;
+            var physicalData = PhysicalDataCreator.Create(heightFeet, heightInches, weight, age, ErrorHandlingType.ThrowException);
+            var patientCalorieCalculator = PatientCalorieCalculatorFactory.Create(physicalData.Data);            
 
             #endregion
 
             #region Calories Calculation
-            /*End validation*/
-            CALORIES = _currentPatient.Calories().ToString();
-            IDEAL_WEIGHT = _currentPatient.IdealBodyWeight().ToString();
+
+            CALORIES = patientCalorieCalculator.GetBasalMetabolicRate().ToString();
+            IDEAL_WEIGHT = patientCalorieCalculator.GetIdealBodyWeight().ToString();
+
             #endregion Calories Calculation
             
-            #region Calculate and display distance from ideal weight
-            //Calculate and display distance from ideal weight            
-            DISTANCE_FROM_IDEAL_WEIGHT = _currentPatient.DistanceFromIdealWeight().ToString();
+            #region Calculate and display distance from ideal weight            
+            
+            DISTANCE_FROM_IDEAL_WEIGHT = patientCalorieCalculator.DistanceFromIdealWeight().ToString();
+            
             #endregion
         } 
 
         public static void Save(string patientSsnPart1,string patientSsnPart2, string patientSsnPart3, string patientFirstName,  
                                    string patientLastName,  string heightFeet, string heightInches, string weight, string age)
         {
-            bool PatientPhysicalDataValidation = PhysicalDataValidator.Validate(heightFeet, heightInches, weight, age);
-            bool PatientPersonalDataValidation = PersonalDataValidator.Validate(patientSsnPart1, patientSsnPart2, patientSsnPart3, patientFirstName, patientLastName);
+            var physicalData = 
+                PhysicalDataCreator.Create(heightFeet, heightInches, weight, age, ErrorHandlingType.ConsoleLog);            
+            var personalData = 
+                PersonalDataCreator.Create(patientSsnPart1, patientSsnPart2, patientSsnPart3, patientFirstName, patientLastName, ErrorHandlingType.ConsoleLog);
                         
-            if (PatientPersonalDataValidation == false || PatientPhysicalDataValidation == false)
+            if (personalData.Invalid || physicalData.Invalid)
             {
                 throw new Exception("Invalid Output");
             }
@@ -182,8 +167,7 @@ namespace CalorieCalculator.API
         {
             DISTANCE_FROM_IDEAL_WEIGHT = "";
             IDEAL_WEIGHT = "";
-            CALORIES = "";
-            _currentPatient = null;
+            CALORIES = "";            
         }
     }
 }

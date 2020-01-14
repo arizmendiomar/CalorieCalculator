@@ -1,8 +1,10 @@
-﻿namespace CalorieCalculator.API.Models
+﻿using CalorieCalculator.API.Models;
+
+namespace CalorieCalculator.API.Services
 {
-    public class MalePatient : Patient
+    public class MaleCalorieCalculator : PatientCalorieCalculator
     {
-        public override double Calories()
+        public override double GetBasalMetabolicRate()
         {
             var calories = (66
                 + (6.3 * base.PhysicalData.Weight)
@@ -13,7 +15,7 @@
             return calories;
         }
 
-        public override double IdealBodyWeight()
+        public override double GetIdealBodyWeight()
         {
             var idealBodyWeight = ((50 +
                 (2.3 * (((base.PhysicalData.HeightFeet - 5) * 12)
@@ -21,5 +23,8 @@
 
             return idealBodyWeight;
         }
+
+        public MaleCalorieCalculator(PatientPhysicalData physicalData) : base(physicalData)
+        { }
     }
 }

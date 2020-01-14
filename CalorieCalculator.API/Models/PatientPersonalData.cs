@@ -8,9 +8,7 @@ namespace CalorieCalculator.API.Models
 {
     public class PatientPersonalData
     {
-        public int PatientSsnPart1 { get; set; }
-        public int PatientSsnPart2 { get; set; }
-        public int PatientSsnPart3 { get; set; }
+        public string PatientSsn { get; set; }        
         public string PatientFirstName { get; set; }
         public string PatientLastName { get; set; }
     }
