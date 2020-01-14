@@ -1,0 +1,34 @@
+Patient: Bob Smith, SSN: 123-33-1234
+Stats: 5'10", 33 year old Male weighing 250 lbs
+Calcuation: Ideal Weight = 160.9358, Distance From Ideal Weight = 89.0642, Calories = 2319.6
+
+Here is your previous history:
+<PatientsHistory>
+  <patient ssn="123-33-1234" firstName="Bob" lastName="Smith">
+    <measurement date="1/8/2020 9:04:19 PM">
+      <height>6010</height>
+      <weight>250</weight>
+      <age>33</age>
+      <dailyCaloriesRecommended>2319.6</dailyCaloriesRecommended>
+      <idealBodyWeight>160.9358</idealBodyWeight>
+      <distanceFromIdealWeight>89.0642</distanceFromIdealWeight>
+    </measurement>
+    <measurement date="1/11/2020 3:32:13 PM">
+      <height>70</height>
+      <weight>250</weight>
+      <age>33</age>
+      <dailyCaloriesRecommended>2319.6</dailyCaloriesRecommended>
+      <idealBodyWeight>160.9358</idealBodyWeight>
+      <distanceFromIdealWeight>89.0642</distanceFromIdealWeight>
+    </measurement>
+    <measurement date="1/11/2020 8:30:25 PM">
+      <height>70</height>
+      <weight>250</weight>
+      <age>33</age>
+      <dailyCaloriesRecommended>2319.6</dailyCaloriesRecommended>
+      <idealBodyWeight>160.9358</idealBodyWeight>
+      <distanceFromIdealWeight>89.0642</distanceFromIdealWeight>
+    </measurement>
+  </patient>
+</PatientsHistory>
+Press enter to quit
