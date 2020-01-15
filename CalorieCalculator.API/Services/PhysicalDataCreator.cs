@@ -46,7 +46,7 @@ namespace CalorieCalculator.API.Services
                 error = true;
             }
             else
-                physicalData.HeightFeet = result1;
+                physicalData.Age = result1;
 
             if (!(Convert.ToDouble(heightFeet) >= 5))
             {

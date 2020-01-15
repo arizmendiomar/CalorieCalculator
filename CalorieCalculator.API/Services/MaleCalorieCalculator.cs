@@ -8,8 +8,7 @@ namespace CalorieCalculator.API.Services
         {
             var calories = (66
                 + (6.3 * base.PhysicalData.Weight)
-                + (12.9 * ((base.PhysicalData.HeightFeet * 12)
-                + base.PhysicalData.HeightInches))
+                + (12.9 * base.PhysicalData.Height)
                 - (6.8 *base.PhysicalData.Age));
 
             return calories;

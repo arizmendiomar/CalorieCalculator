@@ -46,6 +46,11 @@
     <Compile Include="Calc_Old.cs" />
     <Compile Include="Calc.cs" />
     <Compile Include="ErrorHandler.cs" />
+    <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\PatientHealthData.cs" />
+    <Compile Include="Models\PatientsHistorySerializableModels.cs" />
+    <Compile Include="Services\HelperService.cs" />
+    <Compile Include="Services\PatientsHistoryService.cs" />
     <Compile Include="Services\PersonalDataCreator.cs" />
     <Compile Include="Models\DataResult.cs" />
     <Compile Include="Services\PhysicalDataCreator.cs" />

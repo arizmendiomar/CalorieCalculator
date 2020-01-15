@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace CalorieCalculator.API
 {
-    public class Calc_Old
+    public class Calc_old
     {
         public static string DISTANCE_FROM_IDEAL_WEIGHT { get; set; }
         public static string IDEAL_WEIGHT { get; set; }
@@ -189,7 +189,7 @@ namespace CalorieCalculator.API
                 "<patient ssn=\"" + patientSsnPart1 + "-" + patientSsnPart2 + "-" + patientSsnPart3+ "\"" + " firstName=\"" + patientFirstName + "\"" +
                 " lastName=\"" + patientLastName + "\"" + ">" +
                 "<measurement date=\"" + DateTime.Now + "\"" + ">" +
-                "<height>" + ((Convert.ToInt32(heightFeet) * 12) + heightInches).ToString() + "</height>" +
+                "<height>" + ((Convert.ToInt32(heightFeet) * 12) + heightInches).ToString() + "</height>" + //TODO: this is wrong, look at line 233 of this file
                 "<weight>" + weight + "</weight>" +
                 "<age>" + age + "</age>" +
                 "<dailyCaloriesRecommended>" +

@@ -19,21 +19,21 @@ namespace CalorieCalculator.API.Services
                 errorHandler.Handle("You must enter valid SSN.");
             }
             else
-                personalData.PatientSsn = patientSsnPart1 + "-" + patientSsnPart2 + "-" + patientSsnPart3;
+                personalData.SSN = patientSsnPart1 + "-" + patientSsnPart2 + "-" + patientSsnPart3;
 
             if (patientFirstName.Trim().Length < 1)
             {
                 errorHandler.Handle("You must enter patient’s first name.");
             }
             else
-                personalData.PatientFirstName = patientFirstName;
+                personalData.FirstName = patientFirstName;
 
             if (patientLastName.Trim().Length < 1)
             {
                 errorHandler.Handle("You must enter patient’s last name.");
             }
             else
-                personalData.PatientLastName = patientLastName;
+                personalData.LastName = patientLastName;
 
             if (error)
                 personalData = null;
